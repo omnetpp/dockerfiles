@@ -1,0 +1,10 @@
+Copy here
+
+ - the github ssh keys that can access the OMNeT++ repo (is_rsa, id_rsa.pub) - no password please!
+ - the tools directory containing the Windows and macOS toolchains (i.e. in ./tools/170717/...)
+
+NOTE: you need to rebuild this image whenever the Windows/macOS toolchain or Eclipse is updated
+
+build the image with:
+
+$ docker build -t omnetpp/distrobuild:eclipse471-tools170717 -t omnetpp/distrobuild:latest .

@@ -1,0 +1,3 @@
+Build with:
+
+$ docker build -t cross-compilers:ubuntu16.04-macos11-171206 .

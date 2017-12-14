@@ -1,0 +1,3 @@
+Build with:
+
+$ docker build -t distrobuild-base:ubuntu16.04-macos11-171206 .
