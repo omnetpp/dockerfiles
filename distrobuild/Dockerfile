@@ -1,4 +1,4 @@
-FROM omnetpp/distrobuild-base:ubuntu16.04-macos11-171206
+FROM omnetpp/distrobuild-base:ubuntu16.04-macos11-171215
 MAINTAINER Rudolf Hornig <rudi@omnetpp.org>
 
 # provide the github ssh keys in the context dir that can access the OMNeT++ repo (./is_rsa, ./id_rsa.pub) - no password please!
