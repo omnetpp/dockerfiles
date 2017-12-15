@@ -1,0 +1,66 @@
+#!/bin/sh
+# install all packaged needed
+
+pacman -Su \
+autoconf \
+bash \
+bash-completion \
+bison \
+bzip2 \
+catgets \
+cmake \
+coreutils \
+crypt \
+curl \
+dash \
+diffutils \
+dos2unix \
+doxygen \
+file \
+filesystem \
+findutils \
+flex \
+gawk \
+gcc-libs \
+git \
+grep \
+gzip \
+inetutils \
+info \
+less \
+lndir \
+make \
+man-db \
+mingw-w64-x86_64-clang \
+mingw-w64-x86_64-crypto++ \
+mingw-w64-x86_64-gdal \
+mingw-w64-x86_64-gdb \
+mingw-w64-x86_64-libxml2 \
+mingw-w64-x86_64-netcdf \
+mingw-w64-x86_64-osgearth \
+mingw-w64-x86_64-pkg-config \
+mingw-w64-x86_64-qt5 \
+mingw-w64-x86_64-tcl \
+mingw-w64-x86_64-tk \
+mintty \
+msys2-keyring \
+msys2-launcher-git \
+msys2-runtime \
+ncurses \
+p7zip \
+pacman \
+pacman-mirrors \
+pactoys-git \
+patch \
+pax-git \
+pkgfile \
+rebase \
+sed \
+tar \
+tftp-hpa \
+time \
+tzcode \
+unzip \
+util-linux \
+which \
+zip
