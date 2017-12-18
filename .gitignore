@@ -1,3 +1,4 @@
 /distrobuild/tools
 /distrobuild/id_rsa
 /distrobuild/id_rsa.pub
+/dist/*
