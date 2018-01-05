@@ -1,4 +1,4 @@
-FROM omnetpp/distrobuild-base:ubuntu16.04-macos11-171215
+FROM omnetpp/distrobuild-base:ubuntu16.04-macos11-180105
 MAINTAINER Rudolf Hornig <rudi@omnetpp.org>
 
 # provide the github ssh keys in the context dir that can access the OMNeT++ repo (./is_rsa, ./id_rsa.pub) - no password please!
@@ -8,6 +8,7 @@ MAINTAINER Rudolf Hornig <rudi@omnetpp.org>
 ENV TOOLS_DIR /root/tools
 ENV TOOLS_VERSION 170717
 ENV OMNETPP_DIR /root/omnetpp
+ENV PATH $PATH:$OMNETPP_DIR/bin
 
 # clone the directory
 WORKDIR /root
@@ -19,17 +20,17 @@ RUN GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no' git clone -n git@github.co
 # update the eclipse build's MAVEN cache for faster builds
 WORKDIR $OMNETPP_DIR
 # getting only the dependnecies does not work correctly
-#RUN git checkout 85348ed && (cd $OMNETPP_DIR/ui && (mvn dependency:go-offline -DexcludeGroupIds=org.omnetpp.ide || true)) && rm $OMNETPP_DIR/* -rf
+#RUN git checkout 2a84fe5 && (cd $OMNETPP_DIR/ui && (mvn dependency:go-offline -DexcludeGroupIds=org.omnetpp.ide || true)) && rm $OMNETPP_DIR/* -rf
 # we dummy build the IDE and then delete the whole OMNeT++ source, so as a side effect the maven cache will be updated
-ENV PATH $PATH:$OMNETPP_DIR/bin
-RUN git fetch -p && git checkout 2b7b797 && \
+RUN git fetch -p && \
+    git checkout 2a84fe5 && \
     cp configure.user.dist configure.user && \
     ./configure WITH_TKENV=no WITH_QTENV=no WITH_OSG=no WITH_OSGEARTH=no && \
-    make MODE=release ui -j$(nproc)
-RUN ui/releng/org.omnetpp.ide.product/build-ide-java && rm $OMNETPP_DIR/* -rf
+    make MODE=release ui -j$(nproc) && \
+    ui/releng/org.omnetpp.ide.product/build-ide-java && \
+    rm $OMNETPP_DIR/* -rf
 
 # copy the windows/macOS tools into the build image
-# NOTE: update the toolchain vvvvvv HERE !!!
 COPY tools/$TOOLS_VERSION $TOOLS_DIR/$TOOLS_VERSION
 
 # default variables controlling the build

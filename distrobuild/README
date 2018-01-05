@@ -7,4 +7,4 @@ NOTE: you need to rebuild this image whenever the Windows/macOS toolchain or Ecl
 
 build the image with:
 
-$ docker build -t omnetpp/distrobuild:eclipse471-tools170717-171215 -t omnetpp/distrobuild:latest .
+$ docker build -t omnetpp/distrobuild:eclipse472-tools170717-180105 -t omnetpp/distrobuild:latest .
