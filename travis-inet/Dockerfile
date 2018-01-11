@@ -2,7 +2,8 @@ FROM omnetpp/travis-base:5.3p2
 
 # ccache to speed up compilation for fingerprint (not build-only) test jobs,
 # and parts of ffmpeg for the VoIPStream modules
-RUN apt-get install -y --no-install-recommends python3 ccache libavcodec-dev libavformat-dev libavutil-dev libavresample-dev
+RUN apt-get install -y --no-install-recommends python3 ccache libpcap-dev \
+        libavcodec-dev libavformat-dev libavutil-dev libavresample-dev
 
 WORKDIR /root
 
