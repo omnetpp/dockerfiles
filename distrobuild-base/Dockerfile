@@ -1,4 +1,4 @@
-FROM omnetpp/cross-compilers:ubuntu16.04-macos11-180105
+FROM omnetpp/cross-compilers:ubuntu16.04-macos11-180112
 MAINTAINER Rudolf Hornig <rudi@omnetpp.org>
 
 # install additional packages for building a complete OMNeT++ distro (with IDE and docs)
