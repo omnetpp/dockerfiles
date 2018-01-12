@@ -43,6 +43,6 @@ ENV PATH $PATH:/opt/osxcross/target/bin
 # add OMNeT++ specific dependencies and MinGW64 compiler
 RUN apt-get update && \
     apt-get install --no-install-recommends -yy \
-        build-essential perl tofrodos libxml2-dev zlib1g-dev libxml2-utils mingw-w64 clang && \
+        build-essential perl tofrodos libxml2-dev zlib1g-dev libxml2-utils mingw-w64 clang llvm-dev && \
     apt-get clean && \
     apt-get autoclean
