@@ -6,7 +6,7 @@ MAINTAINER Rudolf Hornig <rudi@omnetpp.org>
 
 # omnetpp specific
 ENV TOOLS_DIR /root/tools
-ENV TOOLS_VERSION 170717
+ENV TOOLS_VERSION 180301
 ENV OMNETPP_DIR /root/omnetpp
 ENV PATH $PATH:$OMNETPP_DIR/bin
 
