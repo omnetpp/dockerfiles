@@ -4,52 +4,52 @@ RUN apt-get update && apt-get install -y --no-install-recommends wget ca-certifi
 
 WORKDIR /root
 
-RUN wget https://www.omnetpp.org/component/jdownloads/send/31-release-test-versions/2327-omnetpp-5-3p4-core \
-        --referer=https://omnetpp.org/omnetpp -O omnetpp-5.3p4-src-core.tgz --progress=dot:giga && \
-    tar xf omnetpp-5.3p4-src-core.tgz && rm omnetpp-5.3p4-src-core.tgz
+RUN wget https://www.omnetpp.org/omnetpp/send/30-omnet-releases/2327-omnetpp-5-3-core \
+        --referer=https://omnetpp.org/omnetpp -O omnetpp-5.3-src-core.tgz --progress=dot:giga && \
+    tar xf omnetpp-5.3-src-core.tgz && rm omnetpp-5.3-src-core.tgz
 
-WORKDIR /root/omnetpp-5.3p4
+WORKDIR /root/omnetpp-5.3
 
 # these are optional now, and we don't need them
 RUN rm -rf samples
 
 WORKDIR /root
 
-RUN cp -r omnetpp-5.3p4 omnetpp-5.3p4-macosx && \
-    cp -r omnetpp-5.3p4 omnetpp-5.3p4-windows && \
-    mv omnetpp-5.3p4 omnetpp-5.3p4-linux
+RUN cp -r omnetpp-5.3 omnetpp-5.3-macosx && \
+    cp -r omnetpp-5.3 omnetpp-5.3-windows && \
+    mv omnetpp-5.3 omnetpp-5.3-linux
 
 #### building the linux version
 
-WORKDIR omnetpp-5.3p4-linux
+WORKDIR omnetpp-5.3-linux
 
-ENV PATH /root/omnetpp-5.3p4-linux/bin:$PATH
+ENV PATH /root/omnetpp-5.3-linux/bin:$PATH
 RUN ./configure WITH_TKENV=no WITH_QTENV=no WITH_OSG=no WITH_OSGEARTH=no
 RUN make -j $(nproc)
 
 
 #### building the mac version using some linux tools
 
-WORKDIR /root/omnetpp-5.3p4-macosx
+WORKDIR /root/omnetpp-5.3-macosx
 
-ENV PATH /root/omnetpp-5.3p4-macosx/bin:$PATH
+ENV PATH /root/omnetpp-5.3-macosx/bin:$PATH
 RUN ./configure WITH_TKENV=no WITH_QTENV=no WITH_OSG=no WITH_OSGEARTH=no --host="x86_64-apple-darwin15" \
         CXX="x86_64-apple-darwin15-clang++-libc++" CC="x86_64-apple-darwin15-clang" \
-        MSGC="/root/omnetpp-5.3p4-linux/bin/opp_msgc" NEDTOOL="/root/omnetpp-5.3p4-linux/bin/nedtool"
+        MSGC="/root/omnetpp-5.3-linux/bin/opp_msgc" NEDTOOL="/root/omnetpp-5.3-linux/bin/nedtool"
 RUN make -j $(nproc)
 
 
 #### building the windows version using some linux tools
 
-WORKDIR /root/omnetpp-5.3p4-windows
+WORKDIR /root/omnetpp-5.3-windows
 
-ENV PATH /root/omnetpp-5.3p4-windows/bin:$PATH
+ENV PATH /root/omnetpp-5.3-windows/bin:$PATH
 RUN ./configure WITH_TKENV=no WITH_QTENV=no WITH_OSG=no WITH_OSGEARTH=no --host=x86_64-w64-mingw32 \
-        MSGC="/root/omnetpp-5.3p4-linux/bin/opp_msgc" NEDTOOL="/root/omnetpp-5.3p4-linux/bin/nedtool"
+        MSGC="/root/omnetpp-5.3-linux/bin/opp_msgc" NEDTOOL="/root/omnetpp-5.3-linux/bin/nedtool"
 RUN make -j $(nproc)
 
 # switch back to using the linux tools
-ENV PATH /root/omnetpp-5.3p4-linux/bin:$PATH
+ENV PATH /root/omnetpp-5.3-linux/bin:$PATH
 
 WORKDIR /root
 
