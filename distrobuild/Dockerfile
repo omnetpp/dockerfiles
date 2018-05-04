@@ -1,4 +1,4 @@
-FROM omnetpp/distrobuild-base:ubuntu16.04-macos11-180112
+FROM omnetpp/distrobuild-base:ubuntu18.04-macos11-180705
 MAINTAINER Rudolf Hornig <rudi@omnetpp.org>
 
 # provide the github ssh keys in the context dir that can access the OMNeT++ repo (./is_rsa, ./id_rsa.pub) - no password please!
@@ -19,11 +19,15 @@ RUN GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no' git clone -n git@github.co
 
 # update the eclipse build's MAVEN cache for faster builds
 WORKDIR $OMNETPP_DIR
+# fix ubuntu 18.04 invalid cert format. This may be removed if the base image is based on 18.04.1
+# see: https://gist.github.com/mikaelhg/527204e746984cf9a33f7910bb8b4cb6
+RUN /usr/bin/printf '\xfe\xed\xfe\xed\x00\x00\x00\x02\x00\x00\x00\x00\xe2\x68\x6e\x45\xfb\x43\xdf\xa4\xd9\x92\xdd\x41\xce\xb6\xb2\x1c\x63\x30\xd7\x92' > /etc/ssl/certs/java/cacerts && \
+    /var/lib/dpkg/info/ca-certificates-java.postinst configure
 # getting only the dependnecies does not work correctly
-#RUN git checkout 2a84fe5 && (cd $OMNETPP_DIR/ui && (mvn dependency:go-offline -DexcludeGroupIds=org.omnetpp.ide || true)) && rm $OMNETPP_DIR/* -rf
+#RUN git checkout ff18d12 && (cd $OMNETPP_DIR/ui && (mvn dependency:go-offline -DexcludeGroupIds=org.omnetpp.ide || true)) && rm $OMNETPP_DIR/* -rf
 # we dummy build the IDE and then delete the whole OMNeT++ source, so as a side effect the maven cache will be updated
 RUN git fetch -p && \
-    git checkout 2a84fe5 && \
+    git checkout ff18d12 && \
     cp configure.user.dist configure.user && \
     ./configure WITH_TKENV=no WITH_QTENV=no WITH_OSG=no WITH_OSGEARTH=no && \
     make MODE=release ui -j$(nproc) && \
