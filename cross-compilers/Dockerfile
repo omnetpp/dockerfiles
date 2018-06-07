@@ -1,4 +1,4 @@
-FROM ubuntu:16.04 as builder
+FROM ubuntu:18.04 as builder
 
 # Contains the (cross-)compilers and dependencies needed to build
 # OMNeT++ core (without IDE or docs) for all 3 supported platforms.
@@ -34,7 +34,7 @@ RUN mkdir /opt/osxcross && \
     yes | PORTABLE=true ./build.sh
 
 # sencod stage build (copy only the final resuts from the previous build process)
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 RUN mkdir -p /opt/osxcross/target
 WORKDIR /opt/osxcross/target
 COPY --from=builder /opt/osxcross/target/ .
