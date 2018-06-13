@@ -1,4 +1,4 @@
-FROM omnetpp/travis-base:5.4pre1-180607
+FROM omnetpp/travis-base:5.4-180613
 
 # ccache to allow a very fast build in the second stage, using object files from the first.
 # Parts of ffmpeg for the VoIPStream feature. pkg-config so "make makefiles"
@@ -6,7 +6,7 @@ FROM omnetpp/travis-base:5.4pre1-180607
 # git and ssh for CircleCI, as on there the repo is cloned with git inside the image.
 RUN apt-get update && apt-get install -y --no-install-recommends \
         python python3 ccache git openssh-client libpcap-dev pkg-config \
-        libavcodec-dev libavformat-dev libavutil-dev libavresample-dev
+        libavcodec-dev libavformat-dev libavutil-dev libavresample-dev libfl-dev
 
 WORKDIR /root
 
