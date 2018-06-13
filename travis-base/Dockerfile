@@ -1,12 +1,12 @@
-FROM omnetpp/cross-compilers:ubuntu16.04-macos11-180112
+FROM omnetpp/cross-compilers:ubuntu18.04-macos11-180611
 
 RUN apt-get update && apt-get install -y --no-install-recommends wget ca-certificates bison flex
 
 WORKDIR /root
 
-RUN wget https://www.omnetpp.org/download/omnetpp-5.4pre1-src-core.tgz \
-        --referer=https://omnetpp.org/omnetpp -O omnetpp-5.4pre1-src-core.tgz --progress=dot:giga && \
-    tar xf omnetpp-5.4pre1-src-core.tgz && rm omnetpp-5.4pre1-src-core.tgz
+RUN wget https://www.omnetpp.org/omnetpp/send/30-omnet-releases/2329-omnetpp-5-4-core \
+        --referer=https://omnetpp.org/omnetpp -O omnetpp-5.4-src-core.tgz --progress=dot:giga && \
+    tar xf omnetpp-5.4-src-core.tgz && rm omnetpp-5.4-src-core.tgz
 
 WORKDIR /root/omnetpp-5.4
 
