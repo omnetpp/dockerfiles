@@ -15,7 +15,7 @@ WORKDIR /root
 RUN mkdir -p ~/.ssh
 COPY id_rsa* /root/.ssh/
 RUN chmod go-rwx /root/.ssh/id_rsa
-RUN GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no' git clone -n git@github.com:omnetpp/omnetpp.git
+RUN GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no' git clone -n git@github.com:omnetpp/omnetpp-dev.git omnetpp
 
 # update the eclipse build's MAVEN cache for faster builds
 WORKDIR $OMNETPP_DIR
@@ -24,14 +24,14 @@ WORKDIR $OMNETPP_DIR
 RUN /usr/bin/printf '\xfe\xed\xfe\xed\x00\x00\x00\x02\x00\x00\x00\x00\xe2\x68\x6e\x45\xfb\x43\xdf\xa4\xd9\x92\xdd\x41\xce\xb6\xb2\x1c\x63\x30\xd7\x92' > /etc/ssl/certs/java/cacerts && \
     /var/lib/dpkg/info/ca-certificates-java.postinst configure
 # getting only the dependnecies does not work correctly
-#RUN git checkout ff18d12 && (cd $OMNETPP_DIR/ui && (mvn dependency:go-offline -DexcludeGroupIds=org.omnetpp.ide || true)) && rm $OMNETPP_DIR/* -rf
+#RUN git checkout 8605e0a9 && (cd $OMNETPP_DIR/ui && (mvn dependency:go-offline -DexcludeGroupIds=org.omnetpp.ide || true)) && rm $OMNETPP_DIR/* -rf
 # we dummy build the IDE and then delete the whole OMNeT++ source, so as a side effect the maven cache will be updated
 RUN git fetch -p && \
-    git checkout ff18d12 && \
+    git checkout 8605e0a9 && \
     cp configure.user.dist configure.user && \
     ./configure WITH_TKENV=no WITH_QTENV=no WITH_OSG=no WITH_OSGEARTH=no && \
     make MODE=release ui -j$(nproc) && \
-    ui/releng/org.omnetpp.ide.product/build-ide-java && \
+    releng/ide/java/build-ide-java && \
     rm $OMNETPP_DIR/* -rf
 
 # copy the windows/macOS tools into the build image
@@ -44,4 +44,4 @@ ENV BUILD_CORE_DISTRO true
 ENV BUILD_LINUX_DISTRO true
 ENV BUILD_WIN64_DISTRO true
 ENV BUILD_MACOSX_DISTRO true
-CMD git reset --hard && git fetch -f && git checkout -f $GIT_VERSION && _scripts/build-omnetpp-src-dist
+CMD git reset --hard && git fetch -f && git checkout -f $GIT_VERSION && releng/build-omnetpp
