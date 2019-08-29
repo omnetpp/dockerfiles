@@ -1,0 +1,3 @@
+#!/bin/sh
+VERSION=3.6.6
+docker build --build-arg VERSION=$VERSION -t omnetpp/inet:o5.5.1-$VERSION .
