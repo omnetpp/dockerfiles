@@ -37,8 +37,10 @@ RUN pip3 install Sphinx \
     sphinxcontrib-nwdiag \
     sphinxcontrib-seqdiag \
     sphinxcontrib-exceltable \
-    sphinxcontrib-httpdomain
-
+    sphinxcontrib-httpdomain \
+    sphinxcontrib-images \
+    sphinxcontrib-doxylink \
+    sphinxcontrib-googlechart
 ENV HOME /home
 
 EXPOSE 8000
