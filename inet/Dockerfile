@@ -1,4 +1,4 @@
-FROM omnetpp/omnetpp:u18.04-5.5.1 as base
+FROM omnetpp/omnetpp:u18.04-5.6 as base
 MAINTAINER Rudolf Hornig <rudi@omnetpp.org>
 
 # first stage - build inet
