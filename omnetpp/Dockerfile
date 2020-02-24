@@ -3,7 +3,7 @@ MAINTAINER Rudolf Hornig <rudi@omnetpp.org>
 
 # first stage - build omnet
 FROM base as builder
-ARG VERSION=5.6
+ARG VERSION=5.6.1
 WORKDIR /root
 RUN wget https://github.com/omnetpp/omnetpp/releases/download/omnetpp-$VERSION/omnetpp-$VERSION-src-core.tgz \
          --referer=https://omnetpp.org/ -O omnetpp-src-core.tgz --progress=dot:giga && \
