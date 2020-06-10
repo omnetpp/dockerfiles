@@ -1,0 +1,15 @@
+sphinx_bootstrap_theme
+sphinx_rtd_theme
+sphinx_materialdesign_theme
+recommonmark
+sphinx-autobuild
+sphinx-prompt
+sphinxcontrib-actdiag
+sphinxcontrib-blockdiag
+sphinxcontrib-nwdiag
+sphinxcontrib-seqdiag
+sphinxcontrib-exceltable
+sphinxcontrib-httpdomain
+sphinxcontrib-images
+sphinxcontrib-doxylink
+sphinxcontrib-googlechart

@@ -17,12 +17,13 @@ This image contains:
   - [sphinxcontrib-googlechart](https://pypi.python.org/pypi/sphinxcontrib-googlechart)
   - [sphinxcontrib-httpdomain](https://pypi.python.org/pypi/sphinxcontrib-httpdomain)
   - [sphinxcontrib-image](https://pypi.org/project/sphinxcontrib-images/)
+  - [sphinxcontrib-googleanalytics](https://bitbucket.org/birkenfeld/sphinx-contrib/)
 - Latex to generate PDF documents
 
 ## Build
 
 ```sh
-docker build --force-rm -t omnetpp/docker-sphinx:latest .
+docker build --force-rm -t omnetpp/docker-sphinx:200610 .
 ```
 
 ## Install
@@ -34,5 +35,5 @@ docker pull omnetpp/docker-sphinx
 ## Usage
 
 ```sh
-docker run --rm -i -t -p 8000:8000 -v "${PWD}:/doc" -u "$(id -u):$(id -g)" omnetpp/docker-sphinx <cmd>
+docker run --rm -i -t -p 8000:8000 -v "${PWD}:/docs" -u "$(id -u):$(id -g)" omnetpp/docker-sphinx <cmd>
 ```

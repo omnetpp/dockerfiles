@@ -1,48 +1,12 @@
-FROM ubuntu:18.04
-MAINTAINER Rudolf Hornig <rudi@omnetpp.org>
+# in your Dockerfile
+FROM sphinxdoc/sphinx-latexpdf:3.1.0
 
-# Set up requirements
 RUN export DEBIAN_FRONTEND=noninteractive \
-  && apt-get update && apt-get install --yes --no-install-recommends \
-    python3 \
-    python3-pip \
-    graphviz \
-    imagemagick \
-    ghostscript \
-    texlive \
-    texlive-fonts-recommended \
-    texlive-font-utils \
-    texlive-lang* \
-    texlive-latex-extra \
-    texlive-latex-recommended \
-    latexmk \
-    build-essential \
-    wget \
-    rsync && \
+  && apt-get update && apt-get install --yes --no-install-recommends wget rsync git && \
     apt-get autoremove -y && \
     pip3 install --upgrade pip setuptools && \
     rm -r /root/.cache
 
-# Install Sphinx and extras
-RUN pip3 install Sphinx \
-    alabaster \
-    sphinx_bootstrap_theme \
-    sphinx_rtd_theme \
-    sphinx_materialdesign_theme \
-    recommonmark \
-    sphinx-autobuild \
-    sphinx-prompt \
-    sphinxcontrib-actdiag \
-    sphinxcontrib-blockdiag \
-    sphinxcontrib-nwdiag \
-    sphinxcontrib-seqdiag \
-    sphinxcontrib-exceltable \
-    sphinxcontrib-httpdomain \
-    sphinxcontrib-images \
-    sphinxcontrib-doxylink \
-    sphinxcontrib-googlechart
-ENV HOME /home
-
-EXPOSE 8000
-
-WORKDIR /doc
+WORKDIR /docs
+ADD requirements.txt /docs
+RUN pip3 install -r requirements.txt
