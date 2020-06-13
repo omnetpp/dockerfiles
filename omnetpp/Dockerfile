@@ -3,7 +3,7 @@ MAINTAINER Rudolf Hornig <rudi@omnetpp.org>
 
 # first stage - build omnet
 FROM base as builder
-ARG VERSION=5.6.1
+ARG VERSION=5.6.2
 WORKDIR /root
 RUN wget https://github.com/omnetpp/omnetpp/releases/download/omnetpp-$VERSION/omnetpp-$VERSION-src-core.tgz \
          --referer=https://omnetpp.org/ -O omnetpp-src-core.tgz --progress=dot:giga && \
@@ -18,7 +18,7 @@ RUN ./configure WITH_QTENV=no WITH_OSG=no WITH_OSGEARTH=no && \
 
 # second stage - copy only the final binaries (to get rid of the 'out' folder and reduce the image size)
 FROM base
-ARG VERSION=5.6
+ARG VERSION=5.6.2
 ENV OPP_VER=$VERSION
 RUN mkdir -p /root/omnetpp
 WORKDIR /root/omnetpp
