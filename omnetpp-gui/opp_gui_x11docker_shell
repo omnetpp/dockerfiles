@@ -1,2 +1,2 @@
 #!/bin/sh
-x11docker -i --sudouser -- --rm -v "$(pwd):/root/models" -u "$(id -u):$(id -g)" -- omnetpp/omnetpp-gui:u18.04-5.5.1
+x11docker -i --sudouser -- --rm -v "$(pwd):/root/models" -u "$(id -u):$(id -g)" -- omnetpp/omnetpp-gui:u18.04-5.6.2
