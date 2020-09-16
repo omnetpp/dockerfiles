@@ -1,0 +1,3 @@
+#!/bin/sh
+VERSION=4.2.0
+docker build --network=host --build-arg VERSION=$VERSION -t omnetpp/inet-gui:o5.6.2-$VERSION .

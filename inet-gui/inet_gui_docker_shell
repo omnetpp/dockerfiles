@@ -1,0 +1,2 @@
+#!/bin/sh
+docker run --rm -it --network=host -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=unix$DISPLAY omnetpp/inet-gui:o5.6.2-4.2.0
