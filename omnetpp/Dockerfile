@@ -31,4 +31,4 @@ WORKDIR /root/models
 RUN echo 'PS1="omnetpp-$OPP_VER:\w\$ "' >> /root/.bashrc && chmod +x /root/.bashrc && \
     touch /root/.hushlogin
 ENV HOME=/root/
-CMD /bin/bash --init-file /root/.bashrc
+CMD ["/bin/bash", "--init-file", "/root/.bashrc"]

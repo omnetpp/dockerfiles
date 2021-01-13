@@ -44,4 +44,4 @@ RUN echo 'PS1="omnetpp-gui-$OPP_VER:\w\$ "' >> /root/.bashrc && chmod +x /root/.
     touch /root/.hushlogin
 ENV HOME=/root/
 ENV XDG_RUNTIME_DIR=/tmp/xdg-runtime-root
-CMD /bin/bash --init-file /root/.bashrc
+CMD ["/bin/bash", "--init-file", "/root/.bashrc"]
