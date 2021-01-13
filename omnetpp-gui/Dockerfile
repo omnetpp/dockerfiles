@@ -2,7 +2,7 @@
 #
 
 FROM omnetpp/omnetpp-base:u18.04 as base
-MAINTAINER Rudolf Hornig <rudi@omnetpp.org>
+LABEL maintainer="Rudolf Hornig <rudi@omnetpp.org>"
 RUN apt-get update -y && apt-get install -y --no-install-recommends qt5-default libqt5opengl5-dev \
             libgtk-3-0 libwebkitgtk-3.0-0 default-jre gcc g++ gdb
 

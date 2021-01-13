@@ -1,5 +1,5 @@
 FROM omnetpp/omnetpp:u18.04-5.6.2 as base
-MAINTAINER Rudolf Hornig <rudi@omnetpp.org>
+LABEL maintainer="Rudolf Hornig <rudi@omnetpp.org>"
 
 # first stage - build inet
 FROM base as builder

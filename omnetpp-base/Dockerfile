@@ -1,5 +1,5 @@
 FROM ubuntu:18.04
-MAINTAINER Rudolf Hornig <rudi@omnetpp.org>
+LABEL maintainer="Rudolf Hornig <rudi@omnetpp.org>"
 
 RUN apt-get update -y && \
     apt-get install -y --no-install-recommends git wget curl make ca-certificates bison flex clang perl python3 libxml2-dev libavcodec-dev libavformat-dev  libavutil-dev libavresample-dev libfl-dev libpcap-dev && \
