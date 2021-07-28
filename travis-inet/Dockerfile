@@ -1,4 +1,4 @@
-FROM omnetpp/travis-base:6.0pre10-201218
+FROM omnetpp/travis-base:6.0pre12-210728
 
 # ccache to allow a very fast build in the second stage, using object files from the first.
 # Parts of ffmpeg for the VoIPStream feature. pkg-config so "make makefiles"
