@@ -1,0 +1,3 @@
+#!/bin/sh
+
+docker build -t omnetpp/travis-inet:6.0-220428 .
