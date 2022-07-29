@@ -1,2 +1,2 @@
 #!/bin/sh
-docker build -t omnetpp/omnetpp-base:u18.04-2 .
+docker build -t omnetpp/omnetpp-base:u22.04-1 .
