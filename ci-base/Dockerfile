@@ -1,6 +1,6 @@
 FROM ghcr.io/omnetpp/cross-compilers:ubuntu20.04-macos11.3-210713
 
-ARG OMNETPP_VERSION=6.0
+ARG OMNETPP_VERSION=6.0.1
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
                         wget ca-certificates bison flex \

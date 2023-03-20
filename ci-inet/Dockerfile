@@ -1,4 +1,4 @@
-FROM ghcr.io/inet-framework/ci-base:6.0-220428
+FROM ghcr.io/inet-framework/ci-base:6.0.1-230320
 
 # ccache to allow a very fast build in the second stage, using object files from the first.
 # Parts of ffmpeg for the VoIPStream feature. pkg-config so "make makefiles"

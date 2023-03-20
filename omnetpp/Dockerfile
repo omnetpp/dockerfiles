@@ -3,7 +3,7 @@ LABEL maintainer="Rudolf Hornig <rudi@omnetpp.org>"
 
 # first stage - build omnet
 FROM base as builder
-ARG VERSION=6.0
+ARG VERSION=6.0.1
 WORKDIR /root
 RUN wget https://github.com/omnetpp/omnetpp/releases/download/omnetpp-$VERSION/omnetpp-$VERSION-core.tgz \
          --referer=https://omnetpp.org/ -O omnetpp-core.tgz --progress=dot:giga && \
@@ -18,7 +18,7 @@ RUN . ./setenv && \
 
 # second stage - copy only the final binaries (to get rid of the 'out' folder and reduce the image size)
 FROM base
-ARG VERSION=6.0
+ARG VERSION=6.0.1
 ENV OPP_VER=$VERSION
 RUN mkdir -p /root/omnetpp
 WORKDIR /root/omnetpp
