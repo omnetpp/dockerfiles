@@ -1,4 +1,4 @@
-FROM omnetpp/omnetpp-base:u22.04-1 as base
+FROM ghcr.io/omnetpp/omnetpp-base:u22.04-1 as base
 LABEL maintainer="Rudolf Hornig <rudi@omnetpp.org>"
 
 # first stage - build omnet

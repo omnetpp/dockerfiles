@@ -1,3 +1,3 @@
 #!/bin/sh
 VERSION=4.4.1
-docker build --build-arg VERSION=$VERSION -t omnetpp/inet:o6.0-$VERSION .
+docker build --build-arg VERSION=$VERSION -t ghcr.io/omnetpp/inet:o6.0-$VERSION .

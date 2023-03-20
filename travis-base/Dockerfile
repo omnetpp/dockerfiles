@@ -1,4 +1,4 @@
-FROM omnetpp/cross-compilers:ubuntu20.04-macos11.3-210713
+FROM ghcr.io/omnetpp/cross-compilers:ubuntu20.04-macos11.3-210713
 
 ARG OMNETPP_VERSION=6.0
 

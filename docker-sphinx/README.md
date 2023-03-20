@@ -23,17 +23,17 @@ This image contains:
 ## Build
 
 ```sh
-docker build --force-rm -t omnetpp/docker-sphinx:200610 .
+docker build --force-rm -t ghcr.io/omnetpp/docker-sphinx:200610 .
 ```
 
 ## Install
 
 ```sh
-docker pull omnetpp/docker-sphinx
+docker pull ghcr.io/omnetpp/docker-sphinx
 ```
 
 ## Usage
 
 ```sh
-docker run --rm -i -t -p 8000:8000 -v "${PWD}:/docs" -u "$(id -u):$(id -g)" omnetpp/docker-sphinx <cmd>
+docker run --rm -i -t -p 8000:8000 -v "${PWD}:/docs" -u "$(id -u):$(id -g)" ghcr.io/omnetpp/docker-sphinx <cmd>
 ```
