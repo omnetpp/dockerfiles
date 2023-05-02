@@ -1,12 +1,7 @@
-FROM ghcr.io/inet-framework/ci-base:6.0.1-230320
+FROM ghcr.io/inet-framework/ci-base:6.0.1-230503
 
-# ccache to allow a very fast build in the second stage, using object files from the first.
-# Parts of ffmpeg for the VoIPStream feature. pkg-config so "make makefiles"
-# can detect ffmpeg. libpcap is for the ExternalInterface feature.
-# git and ssh for CircleCI, as on there the repo is cloned with git inside the image.
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        python python3 ccache git openssh-client libpcap-dev pkg-config \
-        libavcodec-dev libavformat-dev libavutil-dev libavresample-dev libfl-dev z3
+        python3 ccache libfl-dev
 
 WORKDIR /root
 

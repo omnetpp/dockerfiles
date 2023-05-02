@@ -1,10 +1,10 @@
-FROM ghcr.io/omnetpp/cross-compilers:ubuntu20.04-macos11.3-210713
+FROM ghcr.io/omnetpp/cross-compilers:ubuntu22.04-macos12.3-230503
 
 ARG OMNETPP_VERSION=6.0.1
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
                         wget ca-certificates bison flex \
-                        libopenscenegraph-dev openscenegraph-plugin-osgearth libosgearth-dev
+                        libopenscenegraph-dev
 
 WORKDIR /root
 
@@ -32,7 +32,7 @@ ENV PATH /root/omnetpp-${OMNETPP_VERSION}-linux/bin:$PATH
 ENV __omnetpp_root_dir /root/omnetpp-${OMNETPP_VERSION}-linux
 ENV OMNETPP_RELEASE omnetpp-${OMNETPP_VERSION}
 
-RUN ./configure WITH_QTENV=no WITH_OSG=yes WITH_OSGEARTH=yes
+RUN ./configure WITH_QTENV=no WITH_OSG=yes WITH_OSGEARTH=no
 RUN make -j $(nproc)
 
 
@@ -43,8 +43,8 @@ WORKDIR /root/omnetpp-${OMNETPP_VERSION}-macosx
 ENV PATH /root/omnetpp-${OMNETPP_VERSION}-macosx/bin:$PATH
 ENV __omnetpp_root_dir /root/omnetpp-${OMNETPP_VERSION}-macosx
 
-RUN ./configure WITH_QTENV=no WITH_OSG=no WITH_OSGEARTH=no --host="x86_64-apple-darwin20.4" \
-        CXX="x86_64-apple-darwin20.4-clang++-libc++" CC="x86_64-apple-darwin20.4-clang" \
+RUN ./configure WITH_QTENV=no WITH_OSG=no WITH_OSGEARTH=no --host="x86_64-apple-darwin21.4" \
+        CXX="x86_64-apple-darwin21.4-clang++-libc++" CC="x86_64-apple-darwin21.4-clang" \
         MSGC="/root/omnetpp-${OMNETPP_VERSION}-linux/bin/opp_msgc" NEDTOOL="/root/omnetpp-${OMNETPP_VERSION}-linux/bin/nedtool"
 RUN make -j $(nproc)
 
