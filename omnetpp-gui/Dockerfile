@@ -1,26 +1,28 @@
-#!/usr/bin/env docker build --build-arg VERSION=5.6.2 -t omnetpp/omnetpp-gui:u18.04-5.6.2 .
-#
+FROM ghcr.io/omnetpp/omnetpp-base:u22.04-1 as base
 
-FROM omnetpp/omnetpp-base:u18.04 as base
 LABEL maintainer="Rudolf Hornig <rudi@omnetpp.org>"
-RUN apt-get update -y && apt-get install -y --no-install-recommends qt5-default libqt5opengl5-dev \
-            libgtk-3-0 libwebkitgtk-3.0-0 default-jre gcc g++ gdb
+
+
+RUN apt-get update -y && apt-get install -y --no-install-recommends qtbase5-dev qtchooser\
+                          qt5-qmake qtbase5-dev-tools libqt5opengl5-dev libwebkit2gtk-4.0-37
 
 # first stage - build OMNeT++ with GUI
 FROM base as builder
 
 ARG VERSION
 WORKDIR /root
-RUN wget https://github.com/omnetpp/omnetpp/releases/download/omnetpp-$VERSION/omnetpp-$VERSION-src-linux.tgz \
-         --referer=https://omnetpp.org/ -O omnetpp-src-linux.tgz --progress=dot:giga && \
-         tar xf omnetpp-src-linux.tgz && rm omnetpp-src-linux.tgz
+RUN wget https://github.com/omnetpp/omnetpp/releases/download/omnetpp-$VERSION/omnetpp-$VERSION-linux-x86_64.tgz \
+         --referer=https://omnetpp.org/ -O omnetpp-core.tgz --progress=dot:giga && \
+         tar xf omnetpp-core.tgz && rm omnetpp-core.tgz
+
 RUN mv omnetpp-$VERSION omnetpp
 WORKDIR /root/omnetpp
 ENV PATH /root/omnetpp/bin:$PATH
 # remove unused files and build
-RUN ./configure WITH_OSG=no WITH_OSGEARTH=no && \
-    make -j $(nproc) MODE=debug base && make -j $(nproc) MODE=release base && \
-    rm -r doc out test samples config.log config.status
+RUN . ./setenv && \
+    ./configure WITH_LIBXML=yes WITH_OSG=no WITH_OSGEARTH=no && \
+    make -j $(nproc) MODE=release base && \
+    rm -r doc out test samples misc config.log config.status
 
 # second stage - copy only the final binaries (to get rid of the 'out' folder and reduce the image size)
 FROM base
