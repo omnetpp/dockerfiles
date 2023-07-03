@@ -1,5 +1,5 @@
 # in your Dockerfile
-FROM sphinxdoc/sphinx-latexpdf:3.1.0
+FROM sphinxdoc/sphinx-latexpdf:5.3.0
 
 RUN export DEBIAN_FRONTEND=noninteractive \
   && apt-get update && apt-get install --yes --no-install-recommends wget rsync git && \
