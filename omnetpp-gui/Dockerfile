@@ -11,6 +11,7 @@ FROM base as builder
 
 ARG VERSION
 WORKDIR /root
+SHELL ["/bin/bash", "-c"]
 RUN wget https://github.com/omnetpp/omnetpp/releases/download/omnetpp-$VERSION/omnetpp-$VERSION-linux-x86_64.tgz \
          --referer=https://omnetpp.org/ -O omnetpp-core.tgz --progress=dot:giga && \
          tar xf omnetpp-core.tgz && rm omnetpp-core.tgz

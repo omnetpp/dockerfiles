@@ -3,7 +3,8 @@ LABEL maintainer="Rudolf Hornig <rudi@omnetpp.org>"
 
 # first stage - build omnet
 FROM base as builder
-ARG VERSION=6.0.1
+ARG VERSION=6.0.3
+SHELL ["/bin/bash", "-c"]
 WORKDIR /root
 RUN wget https://github.com/omnetpp/omnetpp/releases/download/omnetpp-$VERSION/omnetpp-$VERSION-core.tgz \
          --referer=https://omnetpp.org/ -O omnetpp-core.tgz --progress=dot:giga && \
