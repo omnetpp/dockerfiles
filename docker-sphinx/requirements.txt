@@ -14,3 +14,5 @@ sphinxcontrib-httpdomain
 sphinxcontrib-images
 sphinxcontrib-doxylink
 sphinxcontrib-googlechart
+sphinx_immaterial
+doxysphinx
