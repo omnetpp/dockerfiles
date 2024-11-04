@@ -1,2 +1,2 @@
 #!/bin/sh
-docker build -t ghcr.io/omnetpp/omnetpp-base:u22.04-1 .
+docker build -t ghcr.io/omnetpp/omnetpp-base:u24.04-1 .
