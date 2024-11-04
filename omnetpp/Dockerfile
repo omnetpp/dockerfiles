@@ -1,25 +1,28 @@
-FROM ghcr.io/omnetpp/omnetpp-base:u22.04-1 as base
+FROM ghcr.io/omnetpp/omnetpp-base:u24.04-1 as base
 LABEL maintainer="Rudolf Hornig <rudi@omnetpp.org>"
 
 # first stage - build omnet
 FROM base as builder
-ARG VERSION=6.0.3
+ARG VERSION=6.1.0
 SHELL ["/bin/bash", "-c"]
 WORKDIR /root
 RUN wget https://github.com/omnetpp/omnetpp/releases/download/omnetpp-$VERSION/omnetpp-$VERSION-core.tgz \
          --referer=https://omnetpp.org/ -O omnetpp-core.tgz --progress=dot:giga && \
          tar xf omnetpp-core.tgz && rm omnetpp-core.tgz
-RUN mv omnetpp-$VERSION omnetpp
+RUN mv omnetpp-6.1 omnetpp
 WORKDIR /root/omnetpp
 # remove unused files and build
-RUN . ./setenv && \
+RUN python3 -m venv .venv --upgrade-deps --clear --prompt "omnetpp/.venv" && \
+    source .venv/bin/activate && \
+    python3 -m pip install -r python/requirements.txt && \
+    source ./setenv && \
     ./configure WITH_LIBXML=yes WITH_QTENV=no WITH_OSG=no WITH_OSGEARTH=no && \
     make -j $(nproc) MODE=release base && \
     rm -r doc out test samples misc config.log config.status
 
 # second stage - copy only the final binaries (to get rid of the 'out' folder and reduce the image size)
 FROM base
-ARG VERSION=6.0.1
+ARG VERSION=6.1.0
 ENV OPP_VER=$VERSION
 RUN mkdir -p /root/omnetpp
 WORKDIR /root/omnetpp
