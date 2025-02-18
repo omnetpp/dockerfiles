@@ -1,3 +1,9 @@
+#
+# Copyright (C) OpenSim Kft.
+#
+# SPDX-License-Identifier: MIT
+#
+
 FROM ghcr.io/omnetpp/omnetpp-base:u24.04-1 as base
 
 LABEL maintainer="Rudolf Hornig <rudi@omnetpp.org>"

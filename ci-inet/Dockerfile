@@ -1,3 +1,9 @@
+#
+# Copyright (C) OpenSim Kft.
+#
+# SPDX-License-Identifier: MIT
+#
+
 FROM ghcr.io/inet-framework/ci-base:6.0.1-230503
 
 RUN apt-get update && apt-get install -y --no-install-recommends \

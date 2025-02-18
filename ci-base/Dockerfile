@@ -1,3 +1,9 @@
+#
+# Copyright (C) OpenSim Kft.
+#
+# SPDX-License-Identifier: MIT
+#
+
 FROM ghcr.io/omnetpp/cross-compilers:ubuntu22.04-macos12.3-230503
 
 ARG OMNETPP_VERSION=6.0.1

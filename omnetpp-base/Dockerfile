@@ -1,3 +1,9 @@
+#
+# Copyright (C) OpenSim Kft.
+#
+# SPDX-License-Identifier: MIT
+#
+
 FROM ubuntu:24.04
 LABEL maintainer="Rudolf Hornig <rudi@omnetpp.org>"
 
