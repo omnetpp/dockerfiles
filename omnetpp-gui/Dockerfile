@@ -22,7 +22,7 @@ RUN wget https://github.com/omnetpp/omnetpp/releases/download/omnetpp-$VERSION/o
          --referer=https://omnetpp.org/ -O omnetpp-core.tgz --progress=dot:giga && \
          tar xf omnetpp-core.tgz && rm omnetpp-core.tgz
 
-RUN mv omnetpp-6.1 omnetpp
+RUN mv omnetpp-$VERSION omnetpp
 WORKDIR /root/omnetpp
 ENV PATH /root/omnetpp/bin:$PATH
 # remove unused files and build

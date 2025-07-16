@@ -4,31 +4,33 @@
 # SPDX-License-Identifier: MIT
 #
 
-FROM ghcr.io/omnetpp/omnetpp-base:u24.04-1 as base
+FROM ubuntu:24.04 as base
 LABEL maintainer="Rudolf Hornig <rudi@omnetpp.org>"
 
 # first stage - build omnet
 FROM base as builder
-ARG VERSION=6.1.0
+ARG VERSION
 SHELL ["/bin/bash", "-c"]
+
+RUN export DEBIAN_FRONTEND=noninteractive && \
+    apt-get update -y && \
+    apt-get upgrade -y && \
+    apt-get install -y --no-install-recommends git wget curl ca-certificates \
+    && apt-get clean
+
 WORKDIR /root
 RUN wget https://github.com/omnetpp/omnetpp/releases/download/omnetpp-$VERSION/omnetpp-$VERSION-core.tgz \
          --referer=https://omnetpp.org/ -O omnetpp-core.tgz --progress=dot:giga && \
          tar xf omnetpp-core.tgz && rm omnetpp-core.tgz
-RUN mv omnetpp-6.1 omnetpp
+RUN mv omnetpp-$VERSION omnetpp
 WORKDIR /root/omnetpp
 # remove unused files and build
-RUN python3 -m venv .venv --upgrade-deps --clear --prompt "omnetpp/.venv" && \
-    source .venv/bin/activate && \
-    python3 -m pip install -r python/requirements.txt && \
-    source ./setenv && \
-    ./configure WITH_LIBXML=yes WITH_QTENV=no WITH_OSG=no WITH_OSGEARTH=no && \
-    make -j $(nproc) MODE=release base && \
+RUN ./install.sh -y --no-gui && \
     rm -r doc out test samples misc config.log config.status
 
 # second stage - copy only the final binaries (to get rid of the 'out' folder and reduce the image size)
 FROM base
-ARG VERSION=6.1.0
+ARG VERSION
 ENV OPP_VER=$VERSION
 RUN mkdir -p /root/omnetpp
 WORKDIR /root/omnetpp
@@ -38,7 +40,7 @@ RUN chmod 775 /root/ && \
     chmod 775 /root/models
 WORKDIR /root/models
 ENV HOME=/root/
-RUN echo 'PS1="omnetpp-$OPP_VER:\w\$ "' >> /root/.bashrc && \
+RUN echo 'PS1="omnetpp-$VERSION:\w\$ "' >> /root/.bashrc && \
     echo '[ -f "$HOME/omnetpp/setenv" ] && source "$HOME/omnetpp/setenv" -f' >> /root/.bashrc && \
     touch /root/.hushlogin
 CMD ["/bin/bash", "--init-file", "/root/.bashrc"]
