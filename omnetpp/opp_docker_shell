@@ -1,2 +1,3 @@
 #!/bin/sh
-docker run --rm -it -v "$(pwd):/root/models" ghcr.io/omnetpp/omnetpp:u24.04-6.2.0
+. ./setversion
+docker run --rm -it -v "$(pwd):/root/models" ghcr.io/omnetpp/omnetpp:u24.04-$VERSION
