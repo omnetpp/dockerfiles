@@ -8,4 +8,4 @@ fi
 
 . ./setversion
 # example starter to run the image using podman in a wayland session
-x11docker --backend=podman --hostwayland -q --env HOME=/root --workdir=/root/models -i -- --rm -v "$(pwd):/root/models" -- ghcr.io/omnetpp/omnetpp-gui:u24.04-$VERSION
+x11docker --backend=podman --hostwayland -q --env HOME=/root --workdir=/root/models -i -- --rm -v "$(pwd):/root/models" -- ghcr.io/omnetpp/omnetpp-gui:u24.04-$VERSION -c /bin/bash

@@ -33,4 +33,4 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
 WORKDIR /root/models
 COPY --chmod=0555 ./entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["/bin/bash", "--init-file", "/root/.bashrc"]
+CMD ["/bin/bash"]

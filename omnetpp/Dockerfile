@@ -29,4 +29,6 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     echo '[ -f "$HOME/omnetpp/setenv" ] && source "$HOME/omnetpp/setenv" -f' >> /root/.bashrc && \
     touch /root/.hushlogin
 WORKDIR /root/models
-CMD ["/bin/bash", "--init-file", "/root/.bashrc"]
+COPY --chmod=0555 ./entrypoint.sh /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["/bin/bash"]
