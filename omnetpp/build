@@ -1,3 +1,0 @@
-#!/bin/sh
-. ./setversion
-docker build --build-arg VERSION=$VERSION -t ghcr.io/omnetpp/omnetpp:u24.04-$VERSION .
