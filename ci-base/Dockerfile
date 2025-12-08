@@ -37,9 +37,9 @@ RUN cp -r omnetpp-${OMNETPP_VERSION} omnetpp-${OMNETPP_VERSION}-macosx && \
 WORKDIR /root/omnetpp-${OMNETPP_VERSION}-linux
 
 # partially emulating . setenv
-ENV PATH /root/omnetpp-${OMNETPP_VERSION}-linux/bin:$PATH
-ENV __omnetpp_root_dir /root/omnetpp-${OMNETPP_VERSION}-linux
-ENV OMNETPP_RELEASE omnetpp-${OMNETPP_VERSION}
+ENV PATH=/root/omnetpp-${OMNETPP_VERSION}-linux/bin:$PATH
+ENV __omnetpp_root_dir=/root/omnetpp-${OMNETPP_VERSION}-linux
+ENV OMNETPP_RELEASE=omnetpp-${OMNETPP_VERSION}
 
 RUN ./configure WITH_QTENV=no WITH_OSG=yes WITH_OSGEARTH=no
 RUN make -j $(nproc)
@@ -49,8 +49,8 @@ RUN make -j $(nproc)
 
 WORKDIR /root/omnetpp-${OMNETPP_VERSION}-macosx
 
-ENV PATH /root/omnetpp-${OMNETPP_VERSION}-macosx/bin:$PATH
-ENV __omnetpp_root_dir /root/omnetpp-${OMNETPP_VERSION}-macosx
+ENV PATH=/root/omnetpp-${OMNETPP_VERSION}-macosx/bin:$PATH
+ENV __omnetpp_root_dir=/root/omnetpp-${OMNETPP_VERSION}-macosx
 
 RUN ./configure WITH_SCAVE_PYTHON_BINDINGS=no WITH_QTENV=no WITH_OSG=no WITH_OSGEARTH=no --host="x86_64-apple-darwin24.1" \
         CXX="x86_64-apple-darwin24.1-clang++-libc++" CC="x86_64-apple-darwin24.1-clang" \
@@ -62,8 +62,8 @@ RUN make -j $(nproc)
 
 WORKDIR /root/omnetpp-${OMNETPP_VERSION}-windows
 
-ENV PATH /root/omnetpp-${OMNETPP_VERSION}-windows/bin:$PATH
-ENV __omnetpp_root_dir /root/omnetpp-${OMNETPP_VERSION}-windows
+ENV PATH=/root/omnetpp-${OMNETPP_VERSION}-windows/bin:$PATH
+ENV __omnetpp_root_dir=/root/omnetpp-${OMNETPP_VERSION}-windows
 
 RUN ./configure WITH_SCAVE_PYTHON_BINDINGS=no WITH_QTENV=no WITH_OSG=no WITH_OSGEARTH=no --host=x86_64-w64-mingw32 \
         MSGC="/root/omnetpp-${OMNETPP_VERSION}-linux/bin/opp_msgc" NEDTOOL="/root/omnetpp-${OMNETPP_VERSION}-linux/bin/nedtool"
@@ -74,7 +74,7 @@ RUN sed -i 's/const SCAVE_API std::string NULLSTRING = "";/extern const SCAVE_AP
 RUN make -j $(nproc)
 
 # switch back to using the linux tools
-ENV PATH /root/omnetpp-${OMNETPP_VERSION}-linux/bin:$PATH
+ENV PATH=/root/omnetpp-${OMNETPP_VERSION}-linux/bin:$PATH
 
 WORKDIR /root
 
