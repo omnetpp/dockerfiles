@@ -6,10 +6,7 @@
 
 FROM ghcr.io/omnetpp/cross-compilers:ubuntu22.04-macos12.3-251029
 
-# The name of the release on GitHub and the tarballs have the .0 minor version
-ARG OMNETPP_RELEASE=6.1.0
-# But the Version file and the name of the folder in the tarballs don't
-ARG OMNETPP_VERSION=6.1
+ARG OMNETPP_VERSION=6.3.0
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
                         wget ca-certificates bison flex \
@@ -17,9 +14,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 WORKDIR /root
 
-RUN wget https://github.com/omnetpp/omnetpp/releases/download/omnetpp-${OMNETPP_RELEASE}/omnetpp-${OMNETPP_RELEASE}-core.tgz \
-         -O omnetpp-${OMNETPP_RELEASE}-core.tgz --progress=dot:giga && \
-    tar xf omnetpp-${OMNETPP_RELEASE}-core.tgz && rm omnetpp-${OMNETPP_RELEASE}-core.tgz
+RUN wget https://github.com/omnetpp/omnetpp/releases/download/omnetpp-${OMNETPP_VERSION}/omnetpp-${OMNETPP_VERSION}-core.tgz \
+         -O omnetpp-${OMNETPP_VERSION}-core.tgz --progress=dot:giga && \
+    tar xf omnetpp-${OMNETPP_VERSION}-core.tgz && rm omnetpp-${OMNETPP_VERSION}-core.tgz
 
 WORKDIR /root/omnetpp-${OMNETPP_VERSION}
 
@@ -52,6 +49,9 @@ WORKDIR /root/omnetpp-${OMNETPP_VERSION}-macosx
 ENV PATH=/root/omnetpp-${OMNETPP_VERSION}-macosx/bin:$PATH
 ENV __omnetpp_root_dir=/root/omnetpp-${OMNETPP_VERSION}-macosx
 ENV MACOSX_DEPLOYMENT_TARGET=10.14
+
+# This is a HACK to make the build work with the older toolchain.
+RUN sed -i 's/-Wl,-no_warn_duplicate_libraries//' configure
 
 RUN ./configure WITH_SCAVE_PYTHON_BINDINGS=no WITH_QTENV=no WITH_OSG=no WITH_OSGEARTH=no --host="x86_64-apple-darwin21.4" \
         CXX="x86_64-apple-darwin21.4-clang++-libc++" CC="x86_64-apple-darwin21.4-clang" \
