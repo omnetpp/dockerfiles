@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: MIT
 #
 
-FROM ghcr.io/inet-framework/ci-base:6.1.0-250303
+FROM ghcr.io/inet-framework/ci-base:6.3.0-251029
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
         python3 ccache libfl-dev
