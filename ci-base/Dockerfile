@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: MIT
 #
 
-FROM ghcr.io/omnetpp/cross-compilers:ubuntu24.04-macos15.1-250303
+FROM ghcr.io/omnetpp/cross-compilers:ubuntu22.04-macos12.3-251029
 
 # The name of the release on GitHub and the tarballs have the .0 minor version
 ARG OMNETPP_RELEASE=6.1.0
@@ -51,9 +51,10 @@ WORKDIR /root/omnetpp-${OMNETPP_VERSION}-macosx
 
 ENV PATH=/root/omnetpp-${OMNETPP_VERSION}-macosx/bin:$PATH
 ENV __omnetpp_root_dir=/root/omnetpp-${OMNETPP_VERSION}-macosx
+ENV MACOSX_DEPLOYMENT_TARGET=10.14
 
-RUN ./configure WITH_SCAVE_PYTHON_BINDINGS=no WITH_QTENV=no WITH_OSG=no WITH_OSGEARTH=no --host="x86_64-apple-darwin24.1" \
-        CXX="x86_64-apple-darwin24.1-clang++-libc++" CC="x86_64-apple-darwin24.1-clang" \
+RUN ./configure WITH_SCAVE_PYTHON_BINDINGS=no WITH_QTENV=no WITH_OSG=no WITH_OSGEARTH=no --host="x86_64-apple-darwin21.4" \
+        CXX="x86_64-apple-darwin21.4-clang++-libc++" CC="x86_64-apple-darwin21.4-clang" \
         MSGC="/root/omnetpp-${OMNETPP_VERSION}-linux/bin/opp_msgc" NEDTOOL="/root/omnetpp-${OMNETPP_VERSION}-linux/bin/nedtool"
 RUN make -j $(nproc)
 
