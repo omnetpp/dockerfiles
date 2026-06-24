@@ -6,7 +6,7 @@
 
 FROM ghcr.io/omnetpp/cross-compilers:ubuntu22.04-macos13.3-260504
 
-ARG OMNETPP_VERSION=6.3.0
+ARG OMNETPP_VERSION=6.4.0
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
                         wget ca-certificates bison flex \
@@ -48,12 +48,12 @@ WORKDIR /root/omnetpp-${OMNETPP_VERSION}-macosx
 
 ENV PATH=/root/omnetpp-${OMNETPP_VERSION}-macosx/bin:$PATH
 ENV __omnetpp_root_dir=/root/omnetpp-${OMNETPP_VERSION}-macosx
-ENV MACOSX_DEPLOYMENT_TARGET=10.14
+ENV MACOSX_DEPLOYMENT_TARGET=13.3
 
 # This is a HACK to make the build work with the older toolchain.
 RUN sed -i 's/-Wl,-no_warn_duplicate_libraries//' configure
 
-RUN ./configure WITH_SCAVE_PYTHON_BINDINGS=no WITH_QTENV=no WITH_OSG=no WITH_OSGEARTH=no --host="x86_64-apple-darwin22.4" \
+RUN ./configure WITH_SCAVE_PYTHON_BINDINGS=no WITH_PYTHON=no WITH_QTENV=no WITH_OSG=no WITH_OSGEARTH=no --host="x86_64-apple-darwin22.4" \
         CXX="x86_64-apple-darwin22.4-clang++-libc++" CC="x86_64-apple-darwin22.4-clang" \
         MSGC="/root/omnetpp-${OMNETPP_VERSION}-linux/bin/opp_msgc" NEDTOOL="/root/omnetpp-${OMNETPP_VERSION}-linux/bin/nedtool"
 RUN make -j $(nproc)
@@ -66,7 +66,7 @@ WORKDIR /root/omnetpp-${OMNETPP_VERSION}-windows
 ENV PATH=/root/omnetpp-${OMNETPP_VERSION}-windows/bin:$PATH
 ENV __omnetpp_root_dir=/root/omnetpp-${OMNETPP_VERSION}-windows
 
-RUN ./configure WITH_SCAVE_PYTHON_BINDINGS=no WITH_QTENV=no WITH_OSG=no WITH_OSGEARTH=no --host=x86_64-w64-mingw32 \
+RUN ./configure WITH_SCAVE_PYTHON_BINDINGS=no WITH_PYTHON=no WITH_QTENV=no WITH_OSG=no WITH_OSGEARTH=no --host=x86_64-w64-mingw32 \
         MSGC="/root/omnetpp-${OMNETPP_VERSION}-linux/bin/opp_msgc" NEDTOOL="/root/omnetpp-${OMNETPP_VERSION}-linux/bin/nedtool"
 
 # This is a HACK to get around `error: external linkage required for symbol 'omnetpp::scave::NULLSTRING' because of 'dllexport' attribute`
