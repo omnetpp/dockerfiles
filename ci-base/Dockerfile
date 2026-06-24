@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: MIT
 #
 
-FROM ghcr.io/omnetpp/cross-compilers:ubuntu22.04-macos12.3-251029
+FROM ghcr.io/omnetpp/cross-compilers:ubuntu22.04-macos13.3-260504
 
 ARG OMNETPP_VERSION=6.3.0
 
@@ -53,8 +53,8 @@ ENV MACOSX_DEPLOYMENT_TARGET=10.14
 # This is a HACK to make the build work with the older toolchain.
 RUN sed -i 's/-Wl,-no_warn_duplicate_libraries//' configure
 
-RUN ./configure WITH_SCAVE_PYTHON_BINDINGS=no WITH_QTENV=no WITH_OSG=no WITH_OSGEARTH=no --host="x86_64-apple-darwin21.4" \
-        CXX="x86_64-apple-darwin21.4-clang++-libc++" CC="x86_64-apple-darwin21.4-clang" \
+RUN ./configure WITH_SCAVE_PYTHON_BINDINGS=no WITH_QTENV=no WITH_OSG=no WITH_OSGEARTH=no --host="x86_64-apple-darwin22.4" \
+        CXX="x86_64-apple-darwin22.4-clang++-libc++" CC="x86_64-apple-darwin22.4-clang" \
         MSGC="/root/omnetpp-${OMNETPP_VERSION}-linux/bin/opp_msgc" NEDTOOL="/root/omnetpp-${OMNETPP_VERSION}-linux/bin/nedtool"
 RUN make -j $(nproc)
 
